@@ -3,10 +3,10 @@
 
 int main()
 {
-	MegaInt num1("123456789012345678901234567890");
-	MegaInt num2("123456789012345678901234567890");
+	MegaInt num1("123");
+	MegaInt num2("456");
 
-	MegaInt sum = num1 - num2;
+	MegaInt sum = num1 * num2;
 
 	std::cout << sum;
 

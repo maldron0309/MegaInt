@@ -22,7 +22,6 @@ public:
 private:
 	std::string value;
 
-	// 큰 수 더하기
 	static std::string MegaAdd(const std::string& num1, const std::string& num2);
 	static std::string MegaSub(const std::string& num1, const std::string& num2);
 	static std::string MegaMultip(const std::string& num1, const std::string& num2);
@@ -55,7 +54,8 @@ MegaInt MegaInt::operator-(const MegaInt& other) const
 
 MegaInt MegaInt::operator*(const MegaInt& other) const
 {
-	return MegaInt();
+	std::string result = MegaMultip(this->value, other.value);
+	return MegaInt(result);
 }
 
 MegaInt MegaInt::operator/(const MegaInt& other) const
@@ -65,7 +65,7 @@ MegaInt MegaInt::operator/(const MegaInt& other) const
 
 std::ostream& operator<<(std::ostream& os, const MegaInt& obj)
 {
-	os << obj.value; // 올바르게 obj.value로 수정
+	os << obj.value;
 	return os;
 }
 
@@ -111,8 +111,7 @@ std::string MegaInt::MegaSub(const std::string& num1, const std::string& num2)
 			diff += 10;
 			borrow = 1;
 		}
-		else
-			borrow = 0;
+		else borrow = 0;
 
 		result.insert(result.begin(), diff + '0');
 	}
@@ -121,5 +120,37 @@ std::string MegaInt::MegaSub(const std::string& num1, const std::string& num2)
 
 	return result;
 }
+
+std::string MegaInt::MegaMultip(const std::string& num1, const std::string& num2)
+{
+	int digit1 = num1.size();
+	int digit2 = num2.size();
+
+	if (num1 == "0" || num2 == "0") return "0";
+
+	std::vector<int> temp(digit1 + digit2, 0); // 임시 저장
+
+	for (int i = digit1 - 1; i >= 0; i--)
+	{
+		for (int j = digit2 - 1; j >= 0; j--)
+		{
+			auto mul = (num1[i] - '0') * (num2[j] - '0'); // 현재 자릿수 곱셈
+			auto sum = temp[i + j + 1] + mul; // 기존 값 + 곱셈 결과 
+
+			temp[i + j + 1] = sum % 10; // 현재 자릿수 저장
+			temp[i + j] += sum / 10; // 올림 값 다음 자릿수에 저장
+		}
+	}
+
+	std::string result;
+	for (int num : temp)
+	{
+		if (!(result.empty() && num == 0)) result.push_back(num + '0'); // 필요없는 0 제거
+	}
+	
+	return result.empty() ? "0" : result; // 비어있으면 0 반환
+}
+
+
 
 #endif
