@@ -2,26 +2,26 @@
 
 [Korean](./README.md) | [English](./README_EN.md)
 
-C++에서 unsigned long long을 넘어가는 큰 수 연산을 해야할 때 번거롭게 문자열 연산을 하는 것을 해소하기 위해 만든 라이브러리 입니다.
+This library is created to facilitate large number operations beyond unsigned long long in C++, eliminating the need for cumbersome string operations.
 
-## 설치
-`include "MegaInt.h"` 을 통해 라이브러리 사용이 가능합니다.
+## Installation
+`include "MegaInt.h"`  to use the library.
 
-### 기능
-- **operator+**: 큰 수 덧셈
-- **operator-**: 큰 수 뺄셈
-- **operatorx**: 큰 수 곱셈
-- ~~operator/~~: 큰 수 나눗셈 (현재 개발중)
+### Features
+- **operator+**: Addition of large numbers
+- **operator-**: Subtraction of large numbers
+- **operatorx**: Multiplication of large numbers
+- ~~operator/~~: Division of large numbers (currently under development)
   
-## 사용 예시
+## Usage Examples
 
-### 기존 입력 방식
+### Traditional String-based Approach
 ```cpp
 #include <iostream>
 #include <string>
 #include <algorithm>
 
-// 문자열 연산
+// String operation
 std::string AddString(const std::string& num1, const std::string& num2)
 {
     std::string result;
@@ -57,7 +57,7 @@ int main()
 }
 ```
 
-### MegaInt 라이브러리 적용 후
+### Using the MegaInt Library
 ```cpp
 #include <iostream>
 #include "MegaInt.h"
@@ -78,10 +78,8 @@ int main()
 }
 ```
 
-## 계획
-- 현재 나눗셈 기능을 개발하고 있습니다.
+## Roadmap
+- Currently developing the division feature.
 
-## 기여하기
-이 프로젝트에 기여하고 싶으시다면 Issues 또는 Pull Request를 열어주세요! 모든 기여는 환영합니다!
-
-
+## Contributing
+If you'd like to contribute to this project, please open an Issue or a Pull Request. All contributions are welcome!
