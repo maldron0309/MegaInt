@@ -10,6 +10,7 @@ class MegaInt
 public:
 	MegaInt();
 	MegaInt(const std::string& value);
+	MegaInt(const char* value);
 	~MegaInt();
 
 	MegaInt operator+(const MegaInt& other) const;
@@ -24,7 +25,7 @@ private:
 
 	static std::string MegaAdd(const std::string& num1, const std::string& num2);
 	static std::string MegaSub(const std::string& num1, const std::string& num2);
-	static std::string MegaMultip(const std::string& num1, const std::string& num2);
+	static std::string MegaMultiply(const std::string& num1, const std::string& num2);
 	static std::string MegaDivide(const std::string& num1, const std::string& num2);
 };
 
@@ -40,6 +41,8 @@ MegaInt::MegaInt(const std::string& value) : value(value)
 {
 }
 
+MegaInt::MegaInt(const char* value) : value(value) {}
+
 MegaInt MegaInt::operator+(const MegaInt& other) const
 {
 	std::string result = MegaAdd(this->value, other.value);
@@ -54,7 +57,7 @@ MegaInt MegaInt::operator-(const MegaInt& other) const
 
 MegaInt MegaInt::operator*(const MegaInt& other) const
 {
-	std::string result = MegaMultip(this->value, other.value);
+	std::string result = MegaMultiply(this->value, other.value);
 	return MegaInt(result);
 }
 
@@ -121,7 +124,7 @@ std::string MegaInt::MegaSub(const std::string& num1, const std::string& num2)
 	return result;
 }
 
-std::string MegaInt::MegaMultip(const std::string& num1, const std::string& num2)
+std::string MegaInt::MegaMultiply(const std::string& num1, const std::string& num2)
 {
 	int digit1 = num1.size();
 	int digit2 = num2.size();
@@ -147,7 +150,7 @@ std::string MegaInt::MegaMultip(const std::string& num1, const std::string& num2
 	{
 		if (!(result.empty() && num == 0)) result.push_back(num + '0'); // 필요없는 0 제거
 	}
-	
+
 	return result.empty() ? "0" : result; // 비어있으면 0 반환
 }
 
